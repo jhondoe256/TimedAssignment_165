@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using TimedAssignment.Data.Data;
 using TimedAssignment.Services.CommentServices;
 using TimedAssignment.Services.LikeServices;
 using TimedAssignment.Services.PostServices;
@@ -20,6 +22,8 @@ builder.Services.AddScoped<IReplyService,ReplyService>();
 builder.Services.AddScoped<ICommentService,CommentService>();
 builder.Services.AddScoped<ILikeService,LikeService>();
 builder.Services.AddScoped<IPostService,PostService>();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer( builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // the last way to new stuff up via I.O.C container... add singleton 
 // once this guy is created it will last for the entire applications lifespan
